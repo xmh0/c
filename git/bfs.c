@@ -17,7 +17,7 @@ EDGE *bfs(EDGE *matrix, int vertex_no, int vertex_count){
         queue *matrix=queue_create();
         enqueue(matrix, get_edge_list(vertex_no));
         
-        EDGE *pedge;
+        EDGE *pedge; 
         while((pedge=dequeue(matrix))){
                 edge = get_edge_list(pedge->vertex_no);
                 for(;edge;edge=edge->next){

@@ -5,7 +5,6 @@
  *      Author: xmh
  */
 #include<stdio.h>
-
 #include"common.h"
 
 void create_edge_list(EDGE *first, EDGE *edge_arr, int arrlen){
@@ -20,3 +19,6 @@ void create_edge_list(EDGE *first, EDGE *edge_arr, int arrlen){
         }
 }
 
+EDGE *get_edge_list(VERTEX *matrix, int vertex_no){
+        return matrix[vertex_no];
+}
