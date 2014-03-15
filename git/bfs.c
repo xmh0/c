@@ -42,9 +42,11 @@ void print_path(EDGE **parent, int s){
 }
 
 void print_path_rec(EDGE **parent, int s){
-        if(parent[s]){
-                print_path_rec(parent, parent[s]->vertex_no);
+        if(parent[s]==NULL){
                 printf("%d ", s);
+                return;
         }
+        print_path_rec(parent, parent[s]->vertex_no);
+        printf("%d ", s);
 }
 

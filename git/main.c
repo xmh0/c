@@ -47,9 +47,10 @@ void adjlist(){
         create_edge_list(v, 4, (EDGE []){{0, 0}, {1, 0}, {3, 0}}, 3);
         
         EDGE *parent = bfs(v, 0, 5);
+        print_path_rec(parent, 3);
+        printf("\n");
         print_path(parent, 3);
         
-        printf("ok! \n");
         /*
         printf("no: %d \n", edges_list[0]->next->next->vertex_no);
         printf("weight: %d \n", edges_list[0]->next->next->weight);
