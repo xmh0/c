@@ -2,7 +2,7 @@
  * queue.h
  *
  *  Created on: Mar 8, 2014
- *      Author: xmh
+ *  Author: xmh
  */
 
 #ifndef QUEUE_H_

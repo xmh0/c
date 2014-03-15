@@ -2,7 +2,7 @@
  * queue.c
  *
  *  Created on: Mar 9, 2014
- *      Author: xmh
+ *  Author: xmh
  */
 #include<stdio.h>
 #include"queue.h"
@@ -33,6 +33,7 @@ int enqueue(QUEUE *queue, void *x){
 }
 void *dequeue(QUEUE *queue){
         ELE *ele = queue->front;
+        if(ele==NULL)return NULL;
         void *ret = queue->front->x;
         queue->front = queue->front->link;
         free(ele);
@@ -42,7 +43,7 @@ void *dequeue(QUEUE *queue){
 int queue_free(QUEUE *queue){
         ELE *ele;
         for(ele=queue->front; ele; ele=ele->link){
-                free(ele->x);
+                //free(ele->x);
                 free(ele);
         }
         free(queue);

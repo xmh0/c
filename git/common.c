@@ -2,7 +2,7 @@
  * common.c
  *
  *  Created on: Mar 10, 2014
- *      Author: xmh
+ *  Author: xmh
  */
 
 #include<stdlib.h>
@@ -14,7 +14,8 @@ VERTEX *create_vertex_links(int vcount){
         VERTEX *vertics = malloc(sizeof(VERTEX)*vcount);
         for(int i=0; i<vcount; i++){
                 vertics[i].number=0;
-                vertics[i].matrix="good";
+                vertics[i].matrix=NULL;
+                vertics[i].edge=NULL;
         }
         return vertics;
 }

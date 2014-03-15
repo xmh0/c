@@ -2,7 +2,9 @@
 #include<stdlib.h>
 
 #include"common.h"
-
+#include"list.h"
+#include"bfs.h"
+#include"queue.h"
 
 //void test_adjacency_matrix(){
         //VERTEX *v = create_matrix(5);
@@ -27,32 +29,30 @@ void test_w(){
 }
 */
 
+void adjlist();
+
+
 int main(){
-        printf("ok");
+        adjlist();
         return 0;
 }
 
-//void adjlist(){
-        //EDGE *edges_list[10];
-/*
-        edges_list[0] = create_edge(0, 0);
-        edges_list[1] = create_edge(1, 0);
-        edges_list[2] = create_edge(2, 0);
-        edges_list[3] = create_edge(3, 0);
-        edges_list[4] = create_edge(4, 0);
-*/
+void adjlist(){
 
-/*
-        create_edge_list(edges_list[0], (EDGE []){{1, 0}, {4, 0}}, 2);
-        create_edge_list(edges_list[1], (EDGE []){{0, 0},{2, 0},{3, 0},{4, 0}}, 4);
-        create_edge_list(edges_list[2], (EDGE []){{1, 0}, {3, 0}}, 2);
-        create_edge_list(edges_list[3], (EDGE []){{1, 0}, {2, 0}, {4, 0}}, 3);
-        create_edge_list(edges_list[4], (EDGE []){{0, 0}, {1, 0}, {3, 0}}, 3);
-*/
-//        printf("ok! \n");
+        VERTEX *v = create_vertex_links(5);
+        create_edge_list(v, 0, (EDGE []){{1, 0}, {4, 0}}, 2);
+        create_edge_list(v, 1, (EDGE []){{0, 0},{2, 0},{3, 0},{4, 0}}, 4);
+        create_edge_list(v, 2, (EDGE []){{1, 0}, {3, 0}}, 2);
+        create_edge_list(v, 3, (EDGE []){{1, 0}, {2, 0}, {4, 0}}, 3);
+        create_edge_list(v, 4, (EDGE []){{0, 0}, {1, 0}, {3, 0}}, 3);
+        
+        EDGE *parent = bfs(v, 0, 5);
+        print_path(parent, 3);
+        
+        printf("ok! \n");
         /*
         printf("no: %d \n", edges_list[0]->next->next->vertex_no);
         printf("weight: %d \n", edges_list[0]->next->next->weight);
         */
-//}
+}
 
