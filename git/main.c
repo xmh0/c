@@ -29,17 +29,15 @@ void test_w(){
 }
 */
 
-void adjlist_bfs();
-void adjlist_dfs();
-
 int main(){
         //adjlist();
-        adjlist_bfs();
+        adjlist_dfs();
+        printf(" ok ");
         return 0;
 }
 
-void adjlist_bfs(){
 
+void adjlist_bfs(){
         VERTEX *v = create_vertex_links(5);
         create_edge_list(v, 0, (EDGE []){{1, 0}, {4, 0}}, 2);
         create_edge_list(v, 1, (EDGE []){{0, 0},{2, 0},{3, 0},{4, 0}}, 4);
@@ -48,6 +46,7 @@ void adjlist_bfs(){
         create_edge_list(v, 4, (EDGE []){{0, 0}, {1, 0}, {3, 0}}, 3);
         
         EDGE *parent = bfs(v, 0, 5);
+        printf(" bfs: ");
         print_path_rec(parent, 3);
         printf("\n");
         print_path(parent, 3);
@@ -59,7 +58,6 @@ void adjlist_bfs(){
 }
 
 void adjlist_dfs(){
-
         VERTEX *v = create_vertex_links(5);
         create_edge_list(v, 0, (EDGE []){{1, 0}, {4, 0}}, 2);
         create_edge_list(v, 1, (EDGE []){{0, 0},{2, 0},{3, 0},{4, 0}}, 4);
@@ -68,6 +66,7 @@ void adjlist_dfs(){
         create_edge_list(v, 4, (EDGE []){{0, 0}, {1, 0}, {3, 0}}, 3);
         
         EDGE *parent = dfs(v, 5);
+        printf(" dfs: ");
         print_path_rec(parent, 3);
         printf("\n");
         print_path(parent, 3);
