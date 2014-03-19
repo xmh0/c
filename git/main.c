@@ -29,6 +29,9 @@ void test_w(){
 }
 */
 
+void adjlist_bfs();
+void adjlist_dfs();
+
 int main(){
         //adjlist();
         adjlist_dfs();
@@ -66,7 +69,7 @@ void adjlist_dfs(){
         create_edge_list(v, 4, (EDGE []){{0, 0}, {1, 0}, {3, 0}}, 3);
         
         EDGE *parent = dfs(v, 5);
-        printf(" dfs: ");
+        printf(" dfs: \n");
         print_path_rec(parent, 3);
         printf("\n");
         print_path(parent, 3);

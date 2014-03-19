@@ -33,6 +33,8 @@ EDGE *dfs(VERTEX *matrix, int vertex_count){
                 parent[index]=NULL;
         }
         for(int i=0;i<vertex_count;i++){
-                dfs_visit(matrix[i].edge, matrix);
+                EDGE *edge = create_edge(i, 0);
+                dfs_visit(edge, matrix);
         }
+        return parent;
 }
