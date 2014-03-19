@@ -9,7 +9,6 @@
 #define	BFS_H
 
 EDGE *bfs(EDGE *matrix, int vertex_no, int vertex_count);
-void print_path(EDGE **parent, int s);
-void print_path(EDGE **parent, int s);
+EDGE *dfs(EDGE *matrix, int vertex_count);
 
 #endif	/* BFS_H */

@@ -31,3 +31,21 @@ EDGE *create_edge(int vertex_no, int weight){
         edge->next=NULL;
         return edge;
 }
+
+
+void print_path(EDGE **parent, int s){
+        printf("%d ", s);                
+        while(parent[s]){
+                printf("%d ", parent[s]->vertex_no);
+                s=parent[s]->vertex_no; 
+        }
+}
+
+void print_path_rec(EDGE **parent, int s){
+        if(parent[s]==NULL){
+                printf("%d ", s);
+                return;
+        }
+        print_path_rec(parent, parent[s]->vertex_no);
+        printf("%d ", s);
+}
