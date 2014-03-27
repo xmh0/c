@@ -5,6 +5,7 @@
 #include"list.h"
 #include"graph.h"
 #include"queue.h"
+#include"set.h"
 
 //void test_adjacency_matrix(){
         //VERTEX *v = create_matrix(5);
@@ -34,11 +35,25 @@ void adjlist_dfs();
 
 int main(){
         //adjlist();
-        adjlist_dfs();
-        printf(" ok ");
+        //adjlist_dfs();
+        test_set();
+        printf(" \n main end \n");
         return 0;
 }
 
+void test_set(){
+        NODE *set = init_set(10);
+        for(int i=0;i<10;i++){
+                make_set(set, i);
+        }
+        union_set(set, 0, 1);
+        union_set(set, 1, 2);
+        if(find_set(set, 3)==find_set(set, 2)){
+                printf(" 1 and 2 is belong to the same set \n");
+        }else{
+                printf(" not contained \n");
+        }
+}
 
 void adjlist_bfs(){
         VERTEX *v = create_vertex_links(5);
