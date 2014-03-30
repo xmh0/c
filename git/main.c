@@ -7,6 +7,8 @@
 #include"queue.h"
 #include"set.h"
 
+#include"heap.h"
+
 //void test_adjacency_matrix(){
         //VERTEX *v = create_matrix(5);
         /*
@@ -32,13 +34,28 @@ void test_w(){
 
 void adjlist_bfs();
 void adjlist_dfs();
-
+void test_heap();
 int main(){
         //adjlist();
         //adjlist_dfs();
-        test_set();
+        //test_set();
+        test_heap();
         printf(" \n main end \n");
         return 0;
+}
+
+
+void test_heap(){
+        int *heap = init_max_heap(5);
+        heap[1]=1;
+        heap[2]=5;
+        heap[3]=3;
+        heap[4]=2;
+        heap[6]=4;
+        sort_max_heap(heap, 5);
+        for(int i=0;i <5; i++){
+                printf("%d ", heap[i+1]);
+        }
 }
 
 void test_set(){
