@@ -22,7 +22,7 @@ void max_heapify(int *src, int i){
                 max_heapify(src, largest);
         }
 }
-int *init_max_heap(int size){
+int *create_max_heap(int size){
         int *src = malloc(sizeof(int)*(size+1));
         if(src == NULL){
                 printf("init_max_heap malloc error");

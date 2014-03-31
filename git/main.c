@@ -46,7 +46,7 @@ int main(){
 
 
 void test_heap(){
-        int *heap = init_max_heap(5);
+        int *heap = create_max_heap(5);
         heap[1]=1;
         heap[2]=5;
         heap[3]=3;
