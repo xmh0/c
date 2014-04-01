@@ -8,10 +8,23 @@
 #ifndef HEAP_H
 #define	HEAP_H
 
-void max_heapify(int *src, int i);
-int *create_max_heap(int size);
-void build_max_heap(int *src, int size);
-void sort_max_heap(int *src, int size);
+typedef struct heap HEAP;
+typedef struct heap_node HEAP_NODE;
+
+struct heap{
+    HEAP_NODE **ele;
+    int size;
+};
+struct heap_node{
+        void *x;
+        int index;
+};
+
+HEAP *create_max_heap(int size);
+void insert_max_heap(HEAP *heap, HEAP_NODE *heap_node);
+void sort_max_heap(HEAP *src);
+HEAP_NODE *maximum(HEAP *heap);
+HEAP_NODE *extract_max_heap(HEAP *heap);
 
 #endif	/* HEAP_H */
 

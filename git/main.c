@@ -8,6 +8,7 @@
 #include"set.h"
 
 #include"heap.h"
+#define swap(x,y) {__typeof__(x) _x=x; __typeof__(y) _y=y; x=_y; y=_x;}
 
 //void test_adjacency_matrix(){
         //VERTEX *v = create_matrix(5);
@@ -35,27 +36,64 @@ void test_w(){
 void adjlist_bfs();
 void adjlist_dfs();
 void test_heap();
+struct testi{
+        int i;
+};
+typedef struct testi t;
+
 int main(){
         //adjlist();
         //adjlist_dfs();
         //test_set();
         test_heap();
-        printf(" \n main end \n");
         return 0;
 }
 
-
 void test_heap(){
-        int *heap = create_max_heap(5);
-        heap[1]=1;
-        heap[2]=5;
-        heap[3]=3;
-        heap[4]=2;
-        heap[6]=4;
-        sort_max_heap(heap, 5);
-        for(int i=0;i <5; i++){
-                printf("%d ", heap[i+1]);
-        }
+        HEAP *heap = create_max_heap(5);
+        
+        HEAP_NODE *t1,*t2,*t3,*t4,*t5;
+        
+        t1=malloc(sizeof(HEAP_NODE));
+        t2=malloc(sizeof(HEAP_NODE));
+        t3=malloc(sizeof(HEAP_NODE));
+        t4=malloc(sizeof(HEAP_NODE));
+        t5=malloc(sizeof(HEAP_NODE));
+        
+        t1->index=5;
+        t2->index=3;
+        t3->index=2;
+        t4->index=1;
+        t5->index=4;
+        
+        insert_max_heap(heap, t1);
+        insert_max_heap(heap, t2);
+        insert_max_heap(heap, t3);
+        insert_max_heap(heap, t4);
+        insert_max_heap(heap, t5);
+        
+        HEAP_NODE *node = maximum(heap);
+        printf("maximum: %d ", node->index);
+     
+        node = extract_max_heap(heap);
+        printf("\nextract: %d ", node->index);
+        
+        node = extract_max_heap(heap);
+        printf("extract: %d ", node->index);
+        
+        node = extract_max_heap(heap);
+        printf("extract: %d ", node->index);
+        
+        node = extract_max_heap(heap);
+        printf("extract: %d ", node->index);
+        
+        node = extract_max_heap(heap);
+        printf("extract: %d ", node->index);
+        
+        //insert(heap, &t5);
+               
+        //sort_max_heap(heap);
+            
 }
 
 void test_set(){
