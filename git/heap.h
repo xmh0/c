@@ -22,7 +22,7 @@ struct heap_node{
 
 HEAP *create_max_heap(int size);
 void insert_max_heap(HEAP *heap, HEAP_NODE *heap_node);
-void sort_max_heap(HEAP *src);
+void sort_max_heap(HEAP *heap);
 HEAP_NODE *maximum(HEAP *heap);
 HEAP_NODE *extract_max_heap(HEAP *heap);
 

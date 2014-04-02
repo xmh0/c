@@ -44,7 +44,7 @@ HEAP *create_max_heap(int size){
         return src;
 }
 void build_max_heap(HEAP *src){
-        for(int i=(src->size/2)-1; i>0; i--){
+        for(int i=(src->size/2)-1; i>=0; i--){
                 max_heapify(src, i);
         }
 }
@@ -64,8 +64,8 @@ HEAP_NODE *extract_max_heap(HEAP *heap){
         return node;
 }
 void sort_max_heap(HEAP *src){
-        build_max_heap(src);
-        for(int i=src->size; i>0; i--){
+        //build_max_heap(src);
+        for(int i=src->size-1; i>=0; i--){
                 src->size = src->size - 1;
                 swap(src->ele[0], src->ele[i]);
                 max_heapify(src, 0);

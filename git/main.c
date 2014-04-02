@@ -71,6 +71,14 @@ void test_heap(){
         insert_max_heap(heap, t3);
         insert_max_heap(heap, t4);
         insert_max_heap(heap, t5);
+      
+        /*
+        sort_max_heap(heap);
+        for(int i=0; i<5;i++){
+                printf("%d ", heap->ele[i]->index);
+        }
+        return;
+        */
         
         HEAP_NODE *node = maximum(heap);
         printf("maximum: %d ", node->index);
