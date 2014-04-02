@@ -8,8 +8,11 @@
 #ifndef HEAP_H
 #define	HEAP_H
 
+typedef enum heap_type HEAP_TYPE;
 typedef struct heap HEAP;
 typedef struct heap_node HEAP_NODE;
+
+enum heap_type {MAX, MIN};
 
 struct heap{
     HEAP_NODE **ele;
@@ -20,11 +23,10 @@ struct heap_node{
         int index;
 };
 
-HEAP *create_max_heap(int size);
-void insert_max_heap(HEAP *heap, HEAP_NODE *heap_node);
-void sort_max_heap(HEAP *heap);
-HEAP_NODE *maximum(HEAP *heap);
-HEAP_NODE *extract_max_heap(HEAP *heap);
+HEAP *create_heap(int size);
+void insert_heap(HEAP *heap, HEAP_NODE *heap_node, HEAP_TYPE type);
+void sort_heap(HEAP *heap, HEAP_TYPE type);
+HEAP_NODE *extrem_heap(HEAP *heap);
+HEAP_NODE *extract_heap(HEAP *heap, HEAP_TYPE type);
 
 #endif	/* HEAP_H */
-

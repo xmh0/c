@@ -6,8 +6,8 @@
 #include"graph.h"
 #include"queue.h"
 #include"set.h"
+#include"max_heap.h"
 
-#include"heap.h"
 #define swap(x,y) {__typeof__(x) _x=x; __typeof__(y) _y=y; x=_y; y=_x;}
 
 //void test_adjacency_matrix(){
@@ -48,6 +48,63 @@ int main(){
         test_heap();
         return 0;
 }
+
+
+void test_min_heap(){
+        HEAP *heap = create_max_heap(5);
+        
+        HEAP_NODE *t1,*t2,*t3,*t4,*t5;
+        
+        t1=malloc(sizeof(HEAP_NODE));
+        t2=malloc(sizeof(HEAP_NODE));
+        t3=malloc(sizeof(HEAP_NODE));
+        t4=malloc(sizeof(HEAP_NODE));
+        t5=malloc(sizeof(HEAP_NODE));
+        
+        t1->index=5;
+        t2->index=3;
+        t3->index=2;
+        t4->index=1;
+        t5->index=4;
+        
+        insert_max_heap(heap, t1);
+        insert_max_heap(heap, t2);
+        insert_max_heap(heap, t3);
+        insert_max_heap(heap, t4);
+        insert_max_heap(heap, t5);
+      
+        /*
+        sort_max_heap(heap);
+        for(int i=0; i<5;i++){
+                printf("%d ", heap->ele[i]->index);
+        }
+        return;
+        */
+        
+        HEAP_NODE *node = maximum(heap);
+        printf("maximum: %d ", node->index);
+     
+        node = extract_max_heap(heap);
+        printf("\nextract: %d ", node->index);
+        
+        node = extract_max_heap(heap);
+        printf("extract: %d ", node->index);
+        
+        node = extract_max_heap(heap);
+        printf("extract: %d ", node->index);
+        
+        node = extract_max_heap(heap);
+        printf("extract: %d ", node->index);
+        
+        node = extract_max_heap(heap);
+        printf("extract: %d ", node->index);
+        
+        //insert(heap, &t5);
+               
+        //sort_max_heap(heap);
+            
+}
+
 
 void test_heap(){
         HEAP *heap = create_max_heap(5);

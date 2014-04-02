@@ -13,45 +13,64 @@ int right(int i){
 int parent(int i){
         return (i>>1)?(i>>1)-1:0;
 }
-void max_heapify(HEAP *src, int i){
+void heapify(HEAP *src, int i, HEAP_TYPE type){
         int l = left(i), r=right(i), largest=i;
-        if(l<(src->size)&&(src->ele[l]->index)>(src->ele[largest]->index)){
-                swap(l, largest);
+        if(l<(src->size)){
+                if(type==MAX&&(src->ele[l]->index)>(src->ele[largest]->index)){
+                        swap(l, largest);
+                }
+                if(type==MIN&&(src->ele[l]->index)<(src->ele[largest]->index)){
+                        swap(l, largest);
+                }
         }
-        if(r<(src->size)&&(src->ele[r]->index)>(src->ele[largest]->index)){
-                swap(r, largest);
+        if(r<(src->size)){
+                if(type==MAX&&(src->ele[r]->index)>(src->ele[largest]->index)){
+                        swap(r, largest);
+                }
+                if(type==MIN&&(src->ele[r]->index)<(src->ele[largest]->index)){
+                        swap(r, largest);
+                }
         }
         if(i!=largest){
                 swap(src->ele[i], src->ele[largest]);
-                max_heapify(src, largest);
+                heapify(src, largest, type);
         }
 }
-void insert_max_heap(HEAP *heap, HEAP_NODE *heap_node){
+void insert_heap(HEAP *heap, HEAP_NODE *heap_node, HEAP_TYPE type){
         int index = heap->size; 
         heap->ele[heap->size++] = heap_node;
-        while(index>0 && (heap->ele[index]->index)>(heap->ele[parent(index)]->index)){
-                swap(heap->ele[index], heap->ele[parent(index)]);
-                index = parent(index);
+        if(type==MAX){
+                while(index>0&&(heap->ele[index]->index)>(heap->ele[parent(index)]->index)){
+                        swap(heap->ele[index], heap->ele[parent(index)]);
+                        index = parent(index);
+                }
         }
+        if(type==MIN){
+                while(index>0&&type==MIN&&(heap->ele[index]->index)<(heap->ele[parent(index)]->index)){
+                        swap(heap->ele[index], heap->ele[parent(index)]);
+                        index = parent(index);
+                }
+        }
+        
 }
-HEAP *create_max_heap(int size){
-        HEAP *src=malloc(sizeof(HEAP));
-        src->ele = malloc(sizeof(HEAP_NODE*)*size);
-        if(src->ele == NULL){
+HEAP *create_heap(int size){
+        HEAP *heap=malloc(sizeof(HEAP));
+        heap->ele = malloc(sizeof(HEAP_NODE*)*size);
+        if(heap->ele == NULL){
                 printf("create_max_heap malloc error \n");
         }
-        src->size = 0;
-        return src;
+        heap->size = 0;
+        return heap;
 }
-void build_max_heap(HEAP *src){
-        for(int i=(src->size/2)-1; i>=0; i--){
-                max_heapify(src, i);
+void build_heap(HEAP *heap, HEAP_TYPE type){
+        for(int i=(heap->size/2)-1; i>=0; i--){
+                heapify(heap, i, type);
         }
 }
-HEAP_NODE *maximum(HEAP *heap){
+HEAP_NODE *extrem_heap(HEAP *heap){
         return heap->ele[0];
 }
-HEAP_NODE *extract_max_heap(HEAP *heap){
+HEAP_NODE *extract_heap(HEAP *heap, HEAP_TYPE type){
         HEAP_NODE *node=NULL;
         if(heap->size<1){
                 printf(" extract max heap error, heap size if invalid");
@@ -60,14 +79,14 @@ HEAP_NODE *extract_max_heap(HEAP *heap){
         node = heap->ele[0];
         heap->size=heap->size--;
         heap->ele[0]=heap->ele[heap->size];
-        max_heapify(heap, 0);
+        heapify(heap, 0, type);
         return node;
 }
-void sort_max_heap(HEAP *src){
+void sort_heap(HEAP *heap, HEAP_TYPE type){
         //build_max_heap(src);
-        for(int i=src->size-1; i>=0; i--){
-                src->size = src->size - 1;
-                swap(src->ele[0], src->ele[i]);
-                max_heapify(src, 0);
+        for(int i=heap->size-1; i>=0; i--){
+                heap->size = heap->size - 1;
+                swap(heap->ele[0], heap->ele[i]);
+                heapify(heap, 0, type);
         }
 }
