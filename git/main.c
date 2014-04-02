@@ -6,7 +6,7 @@
 #include"graph.h"
 #include"queue.h"
 #include"set.h"
-#include"max_heap.h"
+#include"min_heap.h"
 
 #define swap(x,y) {__typeof__(x) _x=x; __typeof__(y) _y=y; x=_y; y=_x;}
 
@@ -45,13 +45,13 @@ int main(){
         //adjlist();
         //adjlist_dfs();
         //test_set();
-        test_heap();
+        test_min_heap();
         return 0;
 }
 
 
 void test_min_heap(){
-        HEAP *heap = create_max_heap(5);
+        HEAP *heap = create_min_heap(5);
         
         HEAP_NODE *t1,*t2,*t3,*t4,*t5;
         
@@ -67,11 +67,11 @@ void test_min_heap(){
         t4->index=1;
         t5->index=4;
         
-        insert_max_heap(heap, t1);
-        insert_max_heap(heap, t2);
-        insert_max_heap(heap, t3);
-        insert_max_heap(heap, t4);
-        insert_max_heap(heap, t5);
+        insert_min_heap(heap, t1);
+        insert_min_heap(heap, t2);
+        insert_min_heap(heap, t3);
+        insert_min_heap(heap, t4);
+        insert_min_heap(heap, t5);
       
         /*
         sort_max_heap(heap);
@@ -81,22 +81,22 @@ void test_min_heap(){
         return;
         */
         
-        HEAP_NODE *node = maximum(heap);
+        HEAP_NODE *node = minimum(heap);
         printf("maximum: %d ", node->index);
      
-        node = extract_max_heap(heap);
+        node = extract_min_heap(heap);
         printf("\nextract: %d ", node->index);
         
-        node = extract_max_heap(heap);
+        node = extract_min_heap(heap);
         printf("extract: %d ", node->index);
         
-        node = extract_max_heap(heap);
+        node = extract_min_heap(heap);
         printf("extract: %d ", node->index);
         
-        node = extract_max_heap(heap);
+        node = extract_min_heap(heap);
         printf("extract: %d ", node->index);
         
-        node = extract_max_heap(heap);
+        node = extract_min_heap(heap);
         printf("extract: %d ", node->index);
         
         //insert(heap, &t5);

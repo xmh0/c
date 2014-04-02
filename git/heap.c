@@ -11,8 +11,9 @@ int right(int i){
         return (i<<1)+2;
 }
 int parent(int i){
-        return (i>>1)?(i>>1)-1:0;
+        return (i%2)?(i/2):((i/2)-1);
 }
+
 void heapify(HEAP *src, int i, HEAP_TYPE type){
         int l = left(i), r=right(i), largest=i;
         if(l<(src->size)){
@@ -46,12 +47,11 @@ void insert_heap(HEAP *heap, HEAP_NODE *heap_node, HEAP_TYPE type){
                 }
         }
         if(type==MIN){
-                while(index>0&&type==MIN&&(heap->ele[index]->index)<(heap->ele[parent(index)]->index)){
+                while(index>0&&(heap->ele[index]->index)<(heap->ele[parent(index)]->index)){
                         swap(heap->ele[index], heap->ele[parent(index)]);
                         index = parent(index);
                 }
         }
-        
 }
 HEAP *create_heap(int size){
         HEAP *heap=malloc(sizeof(HEAP));

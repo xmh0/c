@@ -4,6 +4,7 @@
  *
  * Created on 2014年4月2日, 下午6:17
  */
+#include"heap.h"
 
 #ifndef MIN_HEAP_H
 #define	MIN_HEAP_H
