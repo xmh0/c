@@ -7,8 +7,7 @@
 
 #include<stdlib.h>
 #include<stdio.h>
-
-#include "graph.h"
+#include"common.h"
 
 VERTEX *create_vertex_links(int vcount){
         VERTEX *vertics = malloc(sizeof(VERTEX)*vcount);

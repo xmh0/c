@@ -3,10 +3,10 @@
 
 #include"graph.h"
 #include"list.h"
-#include"graph.h"
 #include"queue.h"
 #include"set.h"
 #include"min_heap.h"
+#include "common.h"
 
 #define swap(x,y) {__typeof__(x) _x=x; __typeof__(y) _y=y; x=_y; y=_x;}
 
@@ -36,6 +36,8 @@ void test_w(){
 void adjlist_bfs();
 void adjlist_dfs();
 void test_heap();
+void test_kruskal();
+
 struct testi{
         int i;
 };
@@ -45,10 +47,16 @@ int main(){
         //adjlist();
         //adjlist_dfs();
         //test_set();
-        test_min_heap();
+        //test_min_heap();
+        test_kruskal();
         return 0;
 }
 
+void test_kruskal(){
+        GRAPH_EDGE *edge = malloc(sizeof(GRAPH_EDGE)*14);
+        // edge[0]={0,1,4};
+        //printf("u: %d, v:%d, weight: %d", edge[0]->u, edge[0]->v, edge[0]->weight);
+}
 
 void test_min_heap(){
         HEAP *heap = create_min_heap(5);
@@ -162,7 +170,7 @@ void test_heap(){
 }
 
 void test_set(){
-        NODE *set = init_set(10);
+        SET *set = create_set(10);
         for(int i=0;i<10;i++){
                 make_set(set, i);
         }

@@ -5,8 +5,7 @@
 #include"list.h"
 #include"set.h"
 #include"min_heap.h"
-
-typedef struct graph_edge GRAPH_EDGE;
+#include"common.h"
 
 GRAPH_EDGE *kruskal(HEAP *heap, int vertex_count){
         int index=0;
@@ -25,4 +24,3 @@ GRAPH_EDGE *kruskal(HEAP *heap, int vertex_count){
         }
         return arr; 
 }
-

@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include "graph.h"
 #include "list.h"
+#include"common.h"
 
 int time=0;
 int *d,*f;

@@ -24,4 +24,3 @@ extern void *dequeue(QUEUE *queue);
 extern int queue_free();
 
 #endif /* QUEUE_H_ */
-
