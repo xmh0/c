@@ -8,7 +8,6 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
-
 typedef struct edge EDGE;
 typedef struct vertex VERTEX;
 typedef struct graph_edge GRAPH_EDGE;
