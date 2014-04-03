@@ -5,7 +5,7 @@
  */
 #include<stdio.h>
 #include<stdlib.h>
-#include"common.h"
+#include"graph.h"
 
 void create_edge_list(VERTEX *matrix, int vertex_no, EDGE *edge_arr, int arrlen){
         EDGE *tmp = create_edge(edge_arr[0].vertex_no, edge_arr[0].weight);

@@ -11,6 +11,7 @@
 
 typedef struct edge EDGE;
 typedef struct vertex VERTEX;
+typedef struct graph_edge GRAPH_EDGE;
 
 struct edge{
         int vertex_no;
@@ -21,6 +22,11 @@ struct vertex{
         int number;
         char *matrix;
         EDGE *edge;
+};
+struct graph_edge{
+        int u;
+        int v;
+        int weight;
 };
 
 extern VERTEX *create_vertex_links(int vcount);

@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "common.h"
+#include "graph.h"
 #include "list.h"
 
 int time=0;

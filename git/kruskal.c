@@ -1,45 +1,28 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"common.h"
+#include"graph.h"
 #include"queue.h"
 #include"list.h"
 #include"set.h"
+#include"min_heap.h"
 
-/*
-EDGE *kruskal(VERTEX *matrix, int vertex_count){
-        NODE *set = init_set(vertex_count);
-        for(int i=0; i<vertex_count; i++){
+typedef struct graph_edge GRAPH_EDGE;
+
+GRAPH_EDGE *kruskal(HEAP *heap, int vertex_count){
+        int index=0;
+        GRAPH_EDGE arr[vertex_count];
+        SET *set = create_set(vertex_count);
+        for(int i=0;i<vertex_count;i++){
                 make_set(set, i);
         }
-        
+        while(heap->size){
+                HEAP_NODE *node = extract_min_heap(heap);
+                GRAPH_EDGE *edge = node->x;
+                if(find_set(set, edge->u)!=find_set(set, edge->v)){
+                        arr[index++] = *edge;
+                        union_set(set, edge->u, edge->v);
+                }
+        }
+        return arr; 
 }
 
-EDGE *kruskal(VERTEX *matrix, int vertex_no, int vertex_count){
-        enum colorset{WHITE, GRAY, BLACK} *color;
-        color=malloc(sizeof(enum colorset)*vertex_count);
-        int *d=malloc(sizeof(int)*vertex_count);
-        EDGE **parent = malloc(sizeof(EDGE *)*vertex_count);
-        for(int i=0;i<vertex_count;i++){
-                color[i]=WHITE;
-                d[i]=0;
-                parent[i]=NULL;
-        }
-        QUEUE *queue=queue_create();
-        enqueue(queue, create_edge(vertex_no, 0));
-        
-        EDGE *pedge, *edge; 
-        while((pedge=dequeue(queue))){
-                edge = get_edge_list(matrix, pedge->vertex_no);
-                for(;edge;edge=edge->next){
-                        if(color[edge->vertex_no]==WHITE){
-                                color[edge->vertex_no]=GRAY;
-                                d[edge->vertex_no]=d[pedge->vertex_no]+1;
-                                enqueue(queue, edge);
-                                parent[edge->vertex_no]=pedge;
-                        }
-                }
-                color[pedge->vertex_no]=BLACK;
-        }
-        return parent;
-}
-*/

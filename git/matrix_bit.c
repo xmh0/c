@@ -7,7 +7,7 @@
 
 #include<stdio.h>
 
-#include "common.h"
+#include "graph.h"
 #include "matrix_bit.h"
 
 #define CHARLEN (sizeof(char)*8)

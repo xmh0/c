@@ -5,7 +5,7 @@
  *      Author: xmh
  */
 #include<stdio.h>
-#include"common.h"
+#include"graph.h"
 
 int **create_matrix_weight(int vertex_count){
         int **matrix = malloc(sizeof(int)*(vertex_count*vertex_count));

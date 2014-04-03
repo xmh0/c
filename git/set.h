@@ -8,12 +8,12 @@
 #ifndef SET_H
 #define	SET_H
 
-typedef struct set_tree_node NODE;
+typedef struct set_tree_node SET;
 
-NODE *init_set(int len);
-void make_set(NODE *set, int number);
-NODE *find_set(NODE *set, int number);
-void union_set(NODE *set, int x, int y);
+SET *create_set(int len);
+void make_set(SET *set, int number);
+SET *find_set(SET *set, int number);
+void union_set(SET *set, int x, int y);
 
 #endif	/* SET_H */
 
