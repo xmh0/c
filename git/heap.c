@@ -38,7 +38,7 @@ void heapify(HEAP *src, int i, HEAP_TYPE type){
         }
 }
 void insert_heap(HEAP *heap, HEAP_NODE *heap_node, HEAP_TYPE type){
-        int index = heap->size; 
+        int index = heap->size;
         heap->ele[heap->size++] = heap_node;
         if(type==MAX){
                 while(index>0&&(heap->ele[index]->index)>(heap->ele[parent(index)]->index)){

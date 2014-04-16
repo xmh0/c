@@ -8,6 +8,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include"common.h"
+#include"list.h"
 
 VERTEX *create_vertex_links(int vcount){
         VERTEX *vertics = malloc(sizeof(VERTEX)*vcount);
@@ -31,6 +32,15 @@ EDGE *create_edge(int vertex_no, int weight){
         return edge;
 }
 
+int get_edge_weight(VERTEX *vertics, int u, int v){
+        EDGE *edge = get_edge_list(vertics, u);
+        for(; edge; edge=edge->next){
+                if(edge->vertex_no == v){
+                        return edge->weight;
+                }
+        }
+        return -1;
+}
 
 void print_path(EDGE **parent, int s){
         printf("%d ", s);                

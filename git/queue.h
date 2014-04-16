@@ -23,4 +23,4 @@ extern int enqueue(QUEUE *queue, void *ele);
 extern void *dequeue(QUEUE *queue);
 extern int queue_free();
 
-#endif /* QUEUE_H_ */
+#endif  /* QUEUE_H_ */

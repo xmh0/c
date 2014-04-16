@@ -1,12 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<memory.h>
 
 #include"graph.h"
 #include"list.h"
-#include"queue.h"
 #include"set.h"
 #include"min_heap.h"
-#include "common.h"
+#include"common.h"
+#include"queue.h"
 
 #define swap(x,y) {__typeof__(x) _x=x; __typeof__(y) _y=y; x=_y; y=_x;}
 
@@ -42,6 +43,7 @@ struct testi{
         int i;
 };
 typedef struct testi t;
+void test_header();
 
 int main(){
         //adjlist();
@@ -49,13 +51,181 @@ int main(){
         //test_set();
         //test_min_heap();
         test_kruskal();
+        //test_pointer();
+        //test_memset();
+        printf("--------\n");
+        test_prim();
         return 0;
+}
+void test_header(){
+        printf("it is head file.");
+}
+void test_memset(){
+        int a[10];
+        memset(a, NULL, sizeof(int)*10);
+        printf("a[0]: %d", NULL);
+}
+
+void test_pointer(){
+        GRAPH_EDGE edge[14] = {{0,1,4},{1,2,8},{2,3,7},{3,4,9},{4,5,10},{5,6,2},{6,7,1},{7,0,8},{7,1,11},{7,8,7},{8,2,2},{8,6,6}, {5,2,4}, {5,3,14}};
+        struct testi *i0, i1, *i2;
+        i1.i=10;
+        i0=&i1;
+        i2=i0;
+        HEAP_NODE *n0=malloc(sizeof(HEAP_NODE));
+        n0->x = &edge[1];
+        GRAPH_EDGE *arr[14];
+        GRAPH_EDGE *edge1 = n0->x;
+        arr[0]=edge1;
+        printf("arr[0], weight: %d",arr[0]->weight);
+}
+void test_prim(){
+        VERTEX *v = create_vertex_links(9);
+        create_edge_list(v, 0, (EDGE []){{1, 4}, {7, 8}}, 2);
+        create_edge_list(v, 1, (EDGE []){{0, 4},{2, 8},{7, 11}},3);
+        create_edge_list(v, 2, (EDGE []){{1, 8}, {3, 7}, {8, 2}, {5, 4}}, 4);
+        create_edge_list(v, 3, (EDGE []){{2, 7}, {4, 9}, {5, 14}}, 3);
+        create_edge_list(v, 4, (EDGE []){{3, 9}, {5, 10}, {3, 0}}, 3);
+        create_edge_list(v, 5, (EDGE []){{6, 2}, {4, 10}, {2, 4}, {3, 14}}, 4);
+        create_edge_list(v, 6, (EDGE []){{5, 2},{7, 1},{8, 6}}, 3);
+        create_edge_list(v, 7, (EDGE []){{6, 1}, {8, 7}, {0, 8}}, 3);
+        create_edge_list(v, 8, (EDGE []){{7, 7}, {6, 6}, {2, 2}}, 3);
+        
+        /*
+        HEAP *heap=create_min_heap(9);
+        
+        HEAP_NODE *ele=malloc(sizeof(HEAP_NODE));
+        ele->index=0;
+        ele->x=NULL;
+        insert_min_heap(heap, ele);
+        
+        ele = extract_min_heap(heap);
+        printf("%d ", ele->index);
+        
+        ele=malloc(sizeof(HEAP_NODE));
+        ele->index=8;
+        ele->x=NULL;
+        insert_min_heap(heap, ele);
+        
+        ele=malloc(sizeof(HEAP_NODE));
+        ele->index=4;
+        ele->x=NULL;
+        insert_min_heap(heap, ele);
+        
+        HEAP_NODE *node = extract_min_heap(heap);
+        printf("%d ", node->index);
+        
+        ele=malloc(sizeof(HEAP_NODE));
+        ele->index=8;
+        ele->x=NULL;
+        insert_min_heap(heap, ele);
+        
+        ele=malloc(sizeof(HEAP_NODE));
+        ele->index=11;
+        ele->x=NULL;
+        insert_min_heap(heap, ele);
+        
+        ele=malloc(sizeof(HEAP_NODE));
+        ele->index=1;
+        ele->x=NULL;
+        insert_min_heap(heap, ele);
+        
+        ele=malloc(sizeof(HEAP_NODE));
+        ele->index=7;
+        ele->x=NULL;
+        insert_min_heap(heap, ele);
+        
+        HEAP_NODE *node = extract_min_heap(heap);
+        printf("%d ", node->index);        
+        */
+        
+        int *parent = prim(v, 9, 0);
+        for(int i=1; i<9; i++){
+                printf("%d - %d, %d \n", i, parent[i], get_edge_weight(v, i, parent[i]));
+        }
 }
 
 void test_kruskal(){
-        GRAPH_EDGE *edge = malloc(sizeof(GRAPH_EDGE)*14);
-        // edge[0]={0,1,4};
-        //printf("u: %d, v:%d, weight: %d", edge[0]->u, edge[0]->v, edge[0]->weight);
+        GRAPH_EDGE edge[14] = {{0,1,4},{1,2,8},{2,3,7},{3,4,9},{4,5,10},{5,6,2},{6,7,1},{7,0,8},{7,1,11},{7,8,7},{8,2,2},{8,6,6}, {5,2,4}, {5,3,14}};
+        //edge[0] = {0,1,4};
+        //printf("u: %d, v:%d, weight: %d", edge[0].u, edge[0].v, edge[0].weight);
+        //printf("%d, %d, %d",edge[0].u, edge[0].v, edge[0].weight);
+        HEAP *heap=create_min_heap(14);
+        HEAP_NODE *n0=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n1=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n2=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n3=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n4=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n5=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n6=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n7=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n8=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n9=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n10=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n11=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n12=malloc(sizeof(HEAP_NODE));
+        HEAP_NODE *n13=malloc(sizeof(HEAP_NODE));
+        
+        n0->x = &edge[0];
+        n0->index = edge[0].weight;
+        insert_min_heap(heap, n0);
+
+        n1->x=&edge[1];
+        n1->index=edge[1].weight;
+        insert_min_heap(heap, n1);
+
+        n2->x = &edge[2];
+        n2->index=edge[2].weight;
+        insert_min_heap(heap, n2);
+
+        n3->x= &edge[3];
+        n3->index=edge[3].weight;
+        insert_min_heap(heap, n3);
+
+        n4->x=&edge[4];
+        n4->index=edge[4].weight;
+        insert_min_heap(heap, n4);
+
+        n5->x=&edge[5];
+        n5->index=edge[5].weight;
+        insert_min_heap(heap, n5);
+
+        n6->x = &edge[6];
+        n6->index=edge[6].weight;
+        insert_min_heap(heap, n6);
+
+        n7->x = &edge[7];
+        n7->index=edge[7].weight;
+        insert_min_heap(heap, n7);
+
+        n8->x=&edge[8];
+        n8->index=edge[8].weight;
+        insert_min_heap(heap, n8);
+
+        n9->x=&edge[9];
+        n9->index=edge[9].weight;
+        insert_min_heap(heap, n9);
+
+        n10->x = &edge[10];
+        n10->index=edge[10].weight;
+        insert_min_heap(heap, n10);
+
+        n11->x=&edge[11];
+        n11->index=edge[11].weight;
+        insert_min_heap(heap, n11);
+
+        n12->x=&edge[12];
+        n12->index=edge[12].weight;
+        insert_min_heap(heap, n12);
+
+        n13->x=&edge[13];
+        n13->index=edge[13].weight;
+        insert_min_heap(heap, n13);
+
+        GRAPH_EDGE **mini_span_tree = kruskal(heap, 14);
+        for(int i=0;i<8;i++){
+                printf("%d - %d, %d \n", mini_span_tree[i]->u, mini_span_tree[i]->v, mini_span_tree[i]->weight);
+        }
 }
 
 void test_min_heap(){
@@ -199,7 +369,7 @@ void adjlist_bfs(){
         
         /*
         printf("no: %d \n", edges_list[0]->next->next->vertex_no);
-        printf("weight: %d \n", edges_list[0]->next->next->weight);
+        printf("weight: %d \n", edges_list[0]->next->next.weight);
         */
 }
 
@@ -219,7 +389,7 @@ void adjlist_dfs(){
         
         /*
         printf("no: %d \n", edges_list[0]->next->next->vertex_no);
-        printf("weight: %d \n", edges_list[0]->next->next->weight);
+        printf("weight: %d \n", edges_list[0]->next->next.weight);
         */
 }
 

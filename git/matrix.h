@@ -10,6 +10,6 @@
 
 extern int **create_matrix_weight(int vertex_count);
 extern void set_edge_weight(int **matrix, int v, int w, int weight);
-extern int get_edge_weight(int **matrix, int v, int w);
+extern int get_edge_weight_matrix(int **matrix, int v, int w);
 
 #endif /* MATRIX_H_ */

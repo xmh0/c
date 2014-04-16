@@ -20,7 +20,7 @@ void set_edge_weight(int **matrix, int v, int w, int weight){
         (matrix+v)[w]=weight;
 }
 
-int get_edge_weight(int **matrix, int v, int w){
+int get_edge_weight_matrix(int **matrix, int v, int w){
        return (matrix+v)[w];
 }
 
