@@ -32,5 +32,6 @@ extern VERTEX *create_vertex_links(int vcount);
 extern EDGE *create_edge(int vertex_no, int weight);
 extern void print_path(EDGE **parent, int s);
 extern void print_path_rec(EDGE **parent, int s);
+extern int get_edge_weight(VERTEX *vertics, int u, int v);
 
 #endif /* COMMON_H_ */

@@ -9,7 +9,7 @@
 #include"min_heap.h"
 #include"common.h"
 
-GRAPH_EDGE *kruskal(HEAP *heap, int vertex_count){
+GRAPH_EDGE **kruskal(HEAP *heap, int vertex_count){
         int index=0;
         GRAPH_EDGE **arr = malloc(sizeof(GRAPH_EDGE *)*vertex_count);
         SET *set = create_set(vertex_count);
@@ -29,7 +29,7 @@ GRAPH_EDGE *kruskal(HEAP *heap, int vertex_count){
 
 int *prim(VERTEX *graph, int vertex_count, int root){
         int vertics_sizeof = vertex_count * sizeof(int);
-        int queue_num = vertex_count, *parent=malloc(vertics_sizeof), vertics[vertex_count], key[vertex_count];
+        int *parent=malloc(vertics_sizeof), vertics[vertex_count], key[vertex_count];
         memset(parent, -1, vertics_sizeof);
         memset(vertics, 0, vertics_sizeof);
         memset(key, 100, vertics_sizeof);
@@ -40,18 +40,19 @@ int *prim(VERTEX *graph, int vertex_count, int root){
         *vertex_no = root;
         ele->x=vertex_no;
         ele->index = 0;
-        vertics[0]=1;
         insert_min_heap(heap, ele);
-        while(queue_num){
+        while(heap->size){
                 HEAP_NODE *node = extract_min_heap(heap);
-                queue_num--;
-                int *index = node->x;
-                vertics[*index]=1;
-                EDGE *edge = get_edge_list(graph, *index);
+                int *x = node->x;
+                if(vertics[*x]==1){
+                        continue;
+                }
+                vertics[*x]=1;
+                EDGE *edge = get_edge_list(graph, *x);
                 for(;edge;edge=edge->next){
-                        int weight = get_edge_weight(graph, *index, edge->vertex_no);
+                        int weight = get_edge_weight(graph, *x, edge->vertex_no);
                         if(vertics[edge->vertex_no]==0 && weight < key[edge->vertex_no]){
-                                parent[edge->vertex_no] = *index;
+                                parent[edge->vertex_no] = *x;
                                 ele=malloc(sizeof(HEAP_NODE));
                                 vertex_no = malloc(sizeof(int));
                                 *vertex_no = edge->vertex_no;
