@@ -39,6 +39,7 @@ void adjlist_bfs();
 void adjlist_dfs();
 void test_heap();
 void test_kruskal();
+void test_dijkstar();
 
 struct testi{
         int i;
@@ -60,13 +61,14 @@ int main(){
         //adjlist_dfs();
         //test_set();
         
-        test_min_heap();
+        //test_min_heap();
         //test_sum(1);
         //test_kruskal();
         //test_pointer();
         //test_memset();
-        printf("--------\n");
+        //printf("--------\n");
         //test_prim();
+        test_dijkstar();
         return 0;
 }
 void test_header(){
@@ -90,6 +92,29 @@ void test_pointer(){
         GRAPH_EDGE *edge1 = n0->x;
         arr[0]=edge1;
         printf("arr[0], weight: %d",arr[0]->weight);
+}
+
+void print_short_path(int *path, int start, int end){
+        printf("\n");
+        while(start != end){
+                printf("%d ", start);
+                start = path[start];
+        }
+        printf("%d", end);
+}
+void test_dijkstar(){
+        VERTEX *v = create_vertex_links(9);
+        create_edge_list(v, 0, (EDGE []){{1, 10}, {4, 5}}, 2);
+        create_edge_list(v, 1, (EDGE []){{2, 1}, {4, 2}},2);
+        create_edge_list(v, 2, (EDGE []){{3, 4}}, 1);
+        create_edge_list(v, 3, (EDGE []){{0, 7}, {2, 6}}, 2);
+        create_edge_list(v, 4, (EDGE []){{1, 3}, {2, 9}, {3, 2}}, 3);
+       
+        int *path = dijkstar(v, 5, 0);
+        print_short_path(path, 2, 0);
+        print_short_path(path, 3, 0);
+        print_short_path(path, 1, 0);
+        print_short_path(path, 4, 0);
 }
 void test_prim(){
         VERTEX *v = create_vertex_links(9);

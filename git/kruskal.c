@@ -35,12 +35,8 @@ int *prim(VERTEX *graph, int vertex_count, int root){
         memset(key, 100, vertics_sizeof);
         
         HEAP *heap=create_min_heap(vertex_count);
-        HEAP_NODE *ele=malloc(sizeof(HEAP_NODE));
-        int *vertex_no = malloc(sizeof(int));
-        *vertex_no = root;
-        ele->x=vertex_no;
-        ele->weight = 0;
-        insert_min_heap(heap, ele);
+        HEAP_NODE *node = create_node_heap(&root, 0, root);
+        insert_min_heap(heap, node);
         while(heap->size){
                 HEAP_NODE *node = extract_min_heap(heap);
                 int *x = node->x;
@@ -52,14 +48,12 @@ int *prim(VERTEX *graph, int vertex_count, int root){
                 for(;edge;edge=edge->next){
                         int weight = get_edge_weight(graph, *x, edge->vertex_no);
                         if(vertics[edge->vertex_no]==0 && weight < key[edge->vertex_no]){
-                                parent[edge->vertex_no] = *x;
-                                ele=malloc(sizeof(HEAP_NODE));
-                                vertex_no = malloc(sizeof(int));
-                                *vertex_no = edge->vertex_no;
-                                ele->x=vertex_no;
-                                ele->weight = weight;
                                 key[edge->vertex_no] = weight;
-                                insert_min_heap(heap, ele);
+                                parent[edge->vertex_no] = *x;
+                                node = create_node_heap(&edge->vertex_no, weight, edge->vertex_no);
+                                if(update_min_heap(heap, node)==1){
+                                        insert_min_heap(heap, node);
+                                }
                         }
                 }
         }
@@ -69,31 +63,38 @@ int *prim(VERTEX *graph, int vertex_count, int root){
 int *dijkstar(VERTEX *graph, int vertex_count, int root){
         int size_count = sizeof(int)*vertex_count;
         int *parent = malloc(size_count);
-        int d[vertex_count];
-        memset(parent,-1,size_count);
-        memset(d,0,size_count);
+        int d[vertex_count], vertex[vertex_count];
+        memset(parent, -1, size_count);
+        memset(d, 100, size_count);
+        memset(vertex, 0, size_count);
         
+        vertex[root]=1;
+        d[root]=0;
         HEAP *heap=create_min_heap(vertex_count);
-        HEAP_NODE *ele=malloc(sizeof(HEAP_NODE));
-        int *vertex_no = malloc(sizeof(int));
-        *vertex_no = root;
-        ele->x=vertex_no;
-        ele->weight = 0;
-        insert_min_heap(heap, ele);
+        HEAP_NODE *node=create_node_heap(&root, 0, root);
+        insert_min_heap(heap, node);
         
         while(heap->size){
                 HEAP_NODE *node = extract_min_heap(heap);
                 int *x = node->x;
                 EDGE *edge = get_edge_list(graph, *x);
+                vertex[*x] = 1;
+                printf("\n----%d\n", *x);
                 for(;edge;edge=edge->next){
-                        int weight = get_edge_weight(graph, *x, edge->vertex_no);
-                        if(d[edge->vertex_no] > d[*x] + weight){
-                                d[edge->vertex_no] = d[*x] + weight;
-                                *vertex_no = edge->vertex_no;
-                                ele->x=vertex_no;
-                                ele->weight = d[edge->vertex_no];
-                                insert_min_heap(heap, ele);
+                        if(vertex[edge->vertex_no]==0){
+                                int weight = get_edge_weight(graph, *x, edge->vertex_no);
+                                if(d[edge->vertex_no] > d[*x] + weight){
+                                        printf("%d ", edge->vertex_no);
+                                        parent[edge->vertex_no]=*x;
+                                        d[edge->vertex_no] = d[*x] + weight;
+                                        node = create_node_heap(&edge->vertex_no, d[edge->vertex_no], edge->vertex_no);
+                                        if(update_min_heap(heap, node) == 1){
+                                                printf("insert ");
+                                                insert_min_heap(heap, node);
+                                        }
+                                }
                         }
                 }
         }
+        return parent;
 }
