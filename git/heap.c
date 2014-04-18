@@ -1,57 +1,87 @@
+#include<stdarg.h>
+
 #include"stdio.h"
 #include"stdlib.h"
 #include"heap.h"
 
 #define swap(x,y) {__typeof__(x) _x=x; __typeof__(y) _y=y; x=_y; y=_x;}
 
-int left(int i){
+static int left(int i){
         return (i<<1)+1;
 }
-int right(int i){
+static int right(int i){
         return (i<<1)+2;
 }
-int parent(int i){
+static int parent(int i){
         return (i%2)?(i/2):((i/2)-1);
 }
 
-void heapify(HEAP *src, int i, HEAP_TYPE type){
+static void heapify(HEAP *heap, int i, HEAP_TYPE type){
         int l = left(i), r=right(i), largest=i;
-        if(l<(src->size)){
-                if(type==MAX&&(src->ele[l]->index)>(src->ele[largest]->index)){
+        if(l<(heap->size)){
+                if(type==MAX&&(heap->ele[l]->weight)>(heap->ele[largest]->weight)){
                         swap(l, largest);
                 }
-                if(type==MIN&&(src->ele[l]->index)<(src->ele[largest]->index)){
+                if(type==MIN&&(heap->ele[l]->weight)<(heap->ele[largest]->weight)){
                         swap(l, largest);
                 }
         }
-        if(r<(src->size)){
-                if(type==MAX&&(src->ele[r]->index)>(src->ele[largest]->index)){
+        if(r<(heap->size)){
+                if(type==MAX&&(heap->ele[r]->weight)>(heap->ele[largest]->weight)){
                         swap(r, largest);
                 }
-                if(type==MIN&&(src->ele[r]->index)<(src->ele[largest]->index)){
+                if(type==MIN&&(heap->ele[r]->weight)<(heap->ele[largest]->weight)){
                         swap(r, largest);
                 }
         }
         if(i!=largest){
-                swap(src->ele[i], src->ele[largest]);
-                heapify(src, largest, type);
+                swap(heap->ele[i], heap->ele[largest]);
+                heapify(heap, largest, type);
         }
 }
-void insert_heap(HEAP *heap, HEAP_NODE *heap_node, HEAP_TYPE type){
-        int index = heap->size;
-        heap->ele[heap->size++] = heap_node;
+static void increase_heap(HEAP *heap, int index,  HEAP_TYPE type){
         if(type==MAX){
-                while(index>0&&(heap->ele[index]->index)>(heap->ele[parent(index)]->index)){
+                while(index>0&&(heap->ele[index]->weight)>(heap->ele[parent(index)]->weight)){
                         swap(heap->ele[index], heap->ele[parent(index)]);
                         index = parent(index);
                 }
         }
         if(type==MIN){
-                while(index>0&&(heap->ele[index]->index)<(heap->ele[parent(index)]->index)){
+                while(index>0&&(heap->ele[index]->weight)<(heap->ele[parent(index)]->weight)){
                         swap(heap->ele[index], heap->ele[parent(index)]);
                         index = parent(index);
                 }
         }
+}
+void insert_heap(HEAP *heap, HEAP_NODE *heap_node, HEAP_TYPE type){
+        int index = heap->size;
+        heap->ele[heap->size++] = heap_node;
+        increase_heap(heap, index, type);
+}
+int update_heap(HEAP *heap, HEAP_NODE *heap_node, HEAP_TYPE type){
+        int i = heap->size;
+        while(i--){
+                if(heap->ele[i]->id == heap_node->id){
+                        int weight = heap->ele[i]->weight; 
+                        heap->ele[i] = heap_node;
+                        if(type == MIN){
+                                if(weight > heap_node->weight){
+                                        increase_heap(heap, i, MIN);
+                                }else{
+                                        heapify(heap, i, MIN);
+                                }
+                        }
+                        if(type == MAX){
+                                if(weight < heap_node->weight){
+                                        increase_heap(heap, i, MAX);
+                                }else{
+                                        heapify(heap, i, MAX);
+                                }
+                        }
+                        return 0;
+                }
+        }
+        return 1;
 }
 HEAP *create_heap(int size){
         HEAP *heap=malloc(sizeof(HEAP));
@@ -61,6 +91,18 @@ HEAP *create_heap(int size){
         }
         heap->size = 0;
         return heap;
+}
+HEAP_NODE *create_node_heap(void *x, int weight, ...){
+        va_list ap;
+        va_start(ap, 1);
+        int id = va_arg(ap, int);
+        va_end(ap);
+        
+        HEAP_NODE *node = malloc(sizeof(HEAP_NODE));
+        node->x=x;
+        node->id=id;
+        node->weight=weight;
+        return node;
 }
 void build_heap(HEAP *heap, HEAP_TYPE type){
         for(int i=(heap->size/2)-1; i>=0; i--){

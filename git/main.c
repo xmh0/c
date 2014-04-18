@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdarg.h>
 #include<memory.h>
 
 #include"graph.h"
@@ -45,16 +46,27 @@ struct testi{
 typedef struct testi t;
 void test_header();
 
+void test_sum(int num, ...){
+        va_list ap;
+        va_start(ap, 1);
+        memset(ap, -1, sizeof(ap));
+        int id = va_arg(ap, int);
+        va_end(ap);
+        
+        printf("\n id:%d\n", id);
+}
 int main(){
         //adjlist();
         //adjlist_dfs();
         //test_set();
-        //test_min_heap();
-        test_kruskal();
+        
+        test_min_heap();
+        //test_sum(1);
+        //test_kruskal();
         //test_pointer();
         //test_memset();
         printf("--------\n");
-        test_prim();
+        //test_prim();
         return 0;
 }
 void test_header(){
@@ -167,59 +179,59 @@ void test_kruskal(){
         HEAP_NODE *n13=malloc(sizeof(HEAP_NODE));
         
         n0->x = &edge[0];
-        n0->index = edge[0].weight;
+        n0->weight = edge[0].weight;
         insert_min_heap(heap, n0);
 
         n1->x=&edge[1];
-        n1->index=edge[1].weight;
+        n1->weight=edge[1].weight;
         insert_min_heap(heap, n1);
 
         n2->x = &edge[2];
-        n2->index=edge[2].weight;
+        n2->weight=edge[2].weight;
         insert_min_heap(heap, n2);
 
         n3->x= &edge[3];
-        n3->index=edge[3].weight;
+        n3->weight=edge[3].weight;
         insert_min_heap(heap, n3);
 
         n4->x=&edge[4];
-        n4->index=edge[4].weight;
+        n4->weight=edge[4].weight;
         insert_min_heap(heap, n4);
 
         n5->x=&edge[5];
-        n5->index=edge[5].weight;
+        n5->weight=edge[5].weight;
         insert_min_heap(heap, n5);
 
         n6->x = &edge[6];
-        n6->index=edge[6].weight;
+        n6->weight=edge[6].weight;
         insert_min_heap(heap, n6);
 
         n7->x = &edge[7];
-        n7->index=edge[7].weight;
+        n7->weight=edge[7].weight;
         insert_min_heap(heap, n7);
 
         n8->x=&edge[8];
-        n8->index=edge[8].weight;
+        n8->weight=edge[8].weight;
         insert_min_heap(heap, n8);
 
         n9->x=&edge[9];
-        n9->index=edge[9].weight;
+        n9->weight=edge[9].weight;
         insert_min_heap(heap, n9);
 
         n10->x = &edge[10];
-        n10->index=edge[10].weight;
+        n10->weight=edge[10].weight;
         insert_min_heap(heap, n10);
 
         n11->x=&edge[11];
-        n11->index=edge[11].weight;
+        n11->weight=edge[11].weight;
         insert_min_heap(heap, n11);
 
         n12->x=&edge[12];
-        n12->index=edge[12].weight;
+        n12->weight=edge[12].weight;
         insert_min_heap(heap, n12);
 
         n13->x=&edge[13];
-        n13->index=edge[13].weight;
+        n13->weight=edge[13].weight;
         insert_min_heap(heap, n13);
 
         GRAPH_EDGE **mini_span_tree = kruskal(heap, 14);
@@ -233,24 +245,22 @@ void test_min_heap(){
         
         HEAP_NODE *t1,*t2,*t3,*t4,*t5;
         
-        t1=malloc(sizeof(HEAP_NODE));
-        t2=malloc(sizeof(HEAP_NODE));
-        t3=malloc(sizeof(HEAP_NODE));
-        t4=malloc(sizeof(HEAP_NODE));
-        t5=malloc(sizeof(HEAP_NODE));
-        
-        t1->index=5;
-        t2->index=3;
-        t3->index=2;
-        t4->index=1;
-        t5->index=4;
+        t1=create_node_heap(heap, 5, 0);
+        t2=create_node_heap(heap, 3, 1);
+        t3=create_node_heap(heap, 2, 2);
+        t4=create_node_heap(heap, 1, 3);
+        t5=create_node_heap(heap, 4, 4);
         
         insert_min_heap(heap, t1);
         insert_min_heap(heap, t2);
         insert_min_heap(heap, t3);
         insert_min_heap(heap, t4);
         insert_min_heap(heap, t5);
-      
+        
+        HEAP_NODE *t6 = create_node_heap(heap, 0, 10);
+        int ret = update_min_heap(heap, t6);
+        printf("\nret:%d\n", ret);
+        
         /*
         sort_max_heap(heap);
         for(int i=0; i<5;i++){
@@ -260,22 +270,22 @@ void test_min_heap(){
         */
         
         HEAP_NODE *node = minimum(heap);
-        printf("maximum: %d ", node->index);
+        printf("maximum: %d ", node->weight);
      
         node = extract_min_heap(heap);
-        printf("\nextract: %d ", node->index);
+        printf("\nextract: %d ", node->weight);
         
         node = extract_min_heap(heap);
-        printf("extract: %d ", node->index);
+        printf("extract: %d ", node->weight);
         
         node = extract_min_heap(heap);
-        printf("extract: %d ", node->index);
+        printf("extract: %d ", node->weight);
         
         node = extract_min_heap(heap);
-        printf("extract: %d ", node->index);
+        printf("extract: %d ", node->weight);
         
         node = extract_min_heap(heap);
-        printf("extract: %d ", node->index);
+        printf("extract: %d ", node->weight);
         
         //insert(heap, &t5);
                
@@ -295,11 +305,11 @@ void test_heap(){
         t4=malloc(sizeof(HEAP_NODE));
         t5=malloc(sizeof(HEAP_NODE));
         
-        t1->index=5;
-        t2->index=3;
-        t3->index=2;
-        t4->index=1;
-        t5->index=4;
+        t1->weight=5;
+        t2->weight=3;
+        t3->weight=2;
+        t4->weight=1;
+        t5->weight=4;
         
         insert_max_heap(heap, t1);
         insert_max_heap(heap, t2);
@@ -316,22 +326,22 @@ void test_heap(){
         */
         
         HEAP_NODE *node = maximum(heap);
-        printf("maximum: %d ", node->index);
+        printf("maximum: %d ", node->weight);
      
         node = extract_max_heap(heap);
-        printf("\nextract: %d ", node->index);
+        printf("\nextract: %d ", node->weight);
         
         node = extract_max_heap(heap);
-        printf("extract: %d ", node->index);
+        printf("extract: %d ", node->weight);
         
         node = extract_max_heap(heap);
-        printf("extract: %d ", node->index);
+        printf("extract: %d ", node->weight);
         
         node = extract_max_heap(heap);
-        printf("extract: %d ", node->index);
+        printf("extract: %d ", node->weight);
         
         node = extract_max_heap(heap);
-        printf("extract: %d ", node->index);
+        printf("extract: %d ", node->weight);
         
         //insert(heap, &t5);
                

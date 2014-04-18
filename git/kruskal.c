@@ -39,7 +39,7 @@ int *prim(VERTEX *graph, int vertex_count, int root){
         int *vertex_no = malloc(sizeof(int));
         *vertex_no = root;
         ele->x=vertex_no;
-        ele->index = 0;
+        ele->weight = 0;
         insert_min_heap(heap, ele);
         while(heap->size){
                 HEAP_NODE *node = extract_min_heap(heap);
@@ -57,11 +57,43 @@ int *prim(VERTEX *graph, int vertex_count, int root){
                                 vertex_no = malloc(sizeof(int));
                                 *vertex_no = edge->vertex_no;
                                 ele->x=vertex_no;
-                                ele->index = weight;
+                                ele->weight = weight;
                                 key[edge->vertex_no] = weight;
                                 insert_min_heap(heap, ele);
                         }
                 }
         }
         return parent;
+}
+
+int *dijkstar(VERTEX *graph, int vertex_count, int root){
+        int size_count = sizeof(int)*vertex_count;
+        int *parent = malloc(size_count);
+        int d[vertex_count];
+        memset(parent,-1,size_count);
+        memset(d,0,size_count);
+        
+        HEAP *heap=create_min_heap(vertex_count);
+        HEAP_NODE *ele=malloc(sizeof(HEAP_NODE));
+        int *vertex_no = malloc(sizeof(int));
+        *vertex_no = root;
+        ele->x=vertex_no;
+        ele->weight = 0;
+        insert_min_heap(heap, ele);
+        
+        while(heap->size){
+                HEAP_NODE *node = extract_min_heap(heap);
+                int *x = node->x;
+                EDGE *edge = get_edge_list(graph, *x);
+                for(;edge;edge=edge->next){
+                        int weight = get_edge_weight(graph, *x, edge->vertex_no);
+                        if(d[edge->vertex_no] > d[*x] + weight){
+                                d[edge->vertex_no] = d[*x] + weight;
+                                *vertex_no = edge->vertex_no;
+                                ele->x=vertex_no;
+                                ele->weight = d[edge->vertex_no];
+                                insert_min_heap(heap, ele);
+                        }
+                }
+        }
 }

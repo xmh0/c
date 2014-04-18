@@ -16,3 +16,7 @@ HEAP_NODE *minimum(HEAP *heap){
 HEAP_NODE *extract_min_heap(HEAP *heap){
         return extract_heap(heap, MIN);
 }
+int update_min_heap(HEAP *heap, HEAP_NODE *heap_node){
+        return update_heap(heap, heap_node, MIN);
+}
+

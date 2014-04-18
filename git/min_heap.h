@@ -14,6 +14,7 @@ void insert_min_heap(HEAP *heap, HEAP_NODE *heap_node);
 void sort_min_heap(HEAP *heap);
 HEAP_NODE *minimum(HEAP *heap);
 HEAP_NODE *extract_min_heap(HEAP *heap);
+int update_min_heap(HEAP *heap, HEAP_NODE *heap_node);
 
 #endif	/* MIN_HEAP_H */
 
