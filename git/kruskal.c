@@ -79,17 +79,14 @@ int *dijkstar(VERTEX *graph, int vertex_count, int root){
                 int *x = node->x;
                 EDGE *edge = get_edge_list(graph, *x);
                 vertex[*x] = 1;
-                printf("\n----%d\n", *x);
                 for(;edge;edge=edge->next){
                         if(vertex[edge->vertex_no]==0){
                                 int weight = get_edge_weight(graph, *x, edge->vertex_no);
                                 if(d[edge->vertex_no] > d[*x] + weight){
-                                        printf("%d ", edge->vertex_no);
                                         parent[edge->vertex_no]=*x;
                                         d[edge->vertex_no] = d[*x] + weight;
                                         node = create_node_heap(&edge->vertex_no, d[edge->vertex_no], edge->vertex_no);
                                         if(update_min_heap(heap, node) == 1){
-                                                printf("insert ");
                                                 insert_min_heap(heap, node);
                                         }
                                 }
