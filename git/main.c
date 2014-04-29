@@ -10,6 +10,8 @@
 #include"common.h"
 #include"queue.h"
 
+#include"median.h"
+
 #define swap(x,y) {__typeof__(x) _x=x; __typeof__(y) _y=y; x=_y; y=_x;}
 
 //void test_adjacency_matrix(){
@@ -68,8 +70,24 @@ int main(){
         //test_memset();
         //printf("--------\n");
         //test_prim();
-        test_dijkstar();
+        //test_dijkstar();
+        //test_partition();
+        test_median_select();
         return 0;
+}
+test_partition(){
+        int test[]={2,5,3,6,4,1};
+        int ret = partition(test, 0, 5);
+        printf("ret: %d", ret);
+        for(int i=0;i<6;i++){
+                printf(" %d ", test[i]);
+        }
+}
+
+void test_median_select(){
+        int test[]={2,5,1,6,4,8,8,11,8,20};
+        int select = median_select(test, 0, 10, 8);
+        printf("%d", select);
 }
 void test_header(){
         printf("it is head file.");
